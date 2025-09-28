@@ -12,7 +12,7 @@ public class AttackWeakPoint : MonoBehaviour
         
         if (attackEnemy == null)
         {
-            attackEnemy = FindObjectOfType<AttackEnemy>();
+            attackEnemy = FindFirstObjectByType<AttackEnemy>();
         }
     }
 
