@@ -24,10 +24,7 @@ public class LifeSystem : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
        
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            playerLifeLevel -= 1;
-        }
+       
     }
 
 

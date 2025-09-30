@@ -39,7 +39,7 @@ public class MechBody : MonoBehaviour
         CheckGrounded();
 
         // 普通跳跃 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             

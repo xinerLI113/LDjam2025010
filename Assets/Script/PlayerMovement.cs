@@ -24,8 +24,9 @@ public class PlayerMovement : MonoBehaviour
         CheckGrounded();
         if (isGrounded)
         {
-            Movement();
+           
         }
+        Movement();
 
     }
     void Movement()
