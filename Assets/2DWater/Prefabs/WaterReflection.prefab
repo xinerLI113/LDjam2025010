@@ -158,8 +158,8 @@ Transform:
   m_GameObject: {fileID: 6273298642273299133}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.5, y: 9.76, z: -1}
-  m_LocalScale: {x: 0.54398304, y: 3.5, z: 1}
+  m_LocalPosition: {x: -10.42, y: -7.14, z: -1}
+  m_LocalScale: {x: 2.46, y: 6.27, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6273298641869802982}
@@ -333,7 +333,7 @@ BuoyancyEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 640
+    m_Bits: 4294967295
   m_SurfaceLevel: 1
   m_Density: 2
   m_LinearDrag: 5

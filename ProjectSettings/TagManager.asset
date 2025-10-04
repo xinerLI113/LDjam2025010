@@ -8,6 +8,7 @@ TagManager:
   - Skills
   - Obstacle
   - Enemy
+  - Material
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackGround
+    uniqueID: 3993605401
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
