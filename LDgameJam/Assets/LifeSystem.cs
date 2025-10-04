@@ -19,6 +19,8 @@ public class LifeSystem : MonoBehaviour
 
         }
     }
+    
+    // TODO: 你这里是刻意的吗
     void OerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Skills"))
