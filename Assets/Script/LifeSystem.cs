@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class LifeSystem : MonoBehaviour
 {
-    public int playerLifeLevel = 3;
+    public double playerLifeLevel = 3;
     public GameObject obstacle;
+    public int obstacleHurts = 1;//障碍物伤害
     
     
     // Start is called before the first frame update
@@ -18,7 +19,7 @@ public class LifeSystem : MonoBehaviour
         
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            playerLifeLevel -= 1;
+            playerLifeLevel -= obstacleHurts;
         }
     }
     void OnTriggerExit2D(Collider2D collision)

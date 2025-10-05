@@ -14,20 +14,19 @@ public class Manager : MonoBehaviour
     private GameObject weakPoint;
     public GameObject obstaclePrefabs;
     private GameObject obstacle;
-    public GameObject startPoint;  // 起始空物体
-    public GameObject endPoint;    // 终点空物体
+    public GameObject startPoint;
+    public GameObject endPoint;
     public float obstacleSpeed = 3;
     private float timer;
     public float enemytimer;
 
     [Header("Y轴随机范围")]
-    public float yOffsetRange = 2f;  // Y轴随机偏移范围
-
+    public float yOffsetRange = 2f;
     
     public int obstacleInterval = 5;
 
-    // 记录障碍物的目标位置（包含随机Y值）
     private Vector3 targetPosition;
+    private bool hasObstacle = false;
 
     void Start()
     {
@@ -55,21 +54,32 @@ public class Manager : MonoBehaviour
     {
         enemytimer += Time.deltaTime;
         timer += Time.deltaTime;
-        if (timer > obstacleInterval)
+        
+        if (timer > obstacleInterval && !hasObstacle)
         {
             MakeObstacle();
             timer = 0;
-            Debug.Log("进入计时器");
         }
+        
         if (obstacle != null)
         {
-            // 移动到包含随机Y值的目标位置
+            // 移动障碍物
             obstacle.transform.position = Vector3.MoveTowards(
                 obstacle.transform.position,
                 targetPosition,
                 obstacleSpeed * Time.deltaTime
             );
+
+            // 检查是否到达目标
+            if (Vector3.Distance(obstacle.transform.position, targetPosition) <= 0.01f)
+            {
+                
+                DestroyImmediate(obstacle);
+                obstacle = null;
+                hasObstacle = false;
+            }
         }
+        
         if (enemytimer >= 50)
         {
             enemy = Instantiate(enemyPrefab, enemyPrefab.transform.position, Quaternion.identity);
@@ -79,23 +89,25 @@ public class Manager : MonoBehaviour
 
     void MakeObstacle()
     {
-        if (startPoint == null || endPoint == null) return;
+        
 
         // 生成随机Y偏移
         float randomYOffset = UnityEngine.Random.Range(-yOffsetRange, yOffsetRange);
 
-        // 起始位置（包含随机Y值）
+        // 起始位置
         Vector3 spawnPosition = startPoint.transform.position;
         spawnPosition.y += randomYOffset;
 
-        // 目标位置（保持相同的随机Y值，只改变X和Z）
+        // 目标位置
         targetPosition = endPoint.transform.position;
-        targetPosition.y += randomYOffset;  // 终点也使用相同的Y偏移
+        targetPosition.y += randomYOffset;
 
-        obstacle = Instantiate(obstaclePrefabs, spawnPosition, quaternion.identity);
-
-
+        obstacle = Instantiate(obstaclePrefabs, spawnPosition, Quaternion.identity);
+        hasObstacle = true;
+        
+        
     }
 
+    // 在Scene视图中可视化目标位置
     
 }
