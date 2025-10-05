@@ -13,7 +13,7 @@ namespace Script
     
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.CompareTag("Platform")) return;
+            if (collision.gameObject.CompareTag("Water")) return;
             if (parentBehaviour != null)
                 parentBehaviour.OnMissileImpact(transform.position);
             
