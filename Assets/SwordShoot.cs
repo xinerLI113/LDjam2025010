@@ -4,14 +4,13 @@ public class SwordShoot : MonoBehaviour
 {
     public GameObject swordPre;  
     public float speed = 20f;  
-    [SerializeField] private Animator swordAnimator;
     
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             
-            swordAnimator.SetBool("isOnSkill",true);
+            
             Vector3 pos = transform.position + transform.right*2;
             GameObject newBullet = Instantiate(swordPre, pos, transform.rotation);
             

@@ -7,6 +7,7 @@ public class AttackEnemy : MonoBehaviour
     public float lifeLevel = 100;
     
     public float skillOfQValue = 10;
+    public float swordHurts = 10;
     // Start is called before the first frame update
     void Start()
     {

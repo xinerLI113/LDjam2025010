@@ -29,11 +29,11 @@ public class CardManager : MonoBehaviour
         {
             gameTimer += Time.deltaTime;
 
-            if (gameTimer >= 30 && phaseCount <= 4)
-            {
-                SpawnCards();
-                phaseCount++;
-            }
+           // if (gameTimer >= 30 && phaseCount <= 4)
+            //{
+               // SpawnCards();
+                //phaseCount++;
+            //}
         }
     }
 
@@ -53,12 +53,13 @@ public class CardManager : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 
-    void SpawnCards()
+        void SpawnCards()
     {
+        // 清除之前的卡牌和UI
         ClearCurrentCards();
+        ClearAllCardUI();
+        
         cardIndexMap.Clear();
-
-        // 创建临时列表进行洗牌，保持原始索引
         List<GameObject> tempCards = new List<GameObject>(allCards);
         List<int> originalIndices = new List<int>();
         for (int i = 0; i < tempCards.Count; i++)
@@ -71,12 +72,10 @@ public class CardManager : MonoBehaviour
         {
             int rnd = Random.Range(i, tempCards.Count);
 
-            // 交换卡片
             GameObject tempCard = tempCards[i];
             tempCards[i] = tempCards[rnd];
             tempCards[rnd] = tempCard;
 
-            // 交换索引
             int tempIndex = originalIndices[i];
             originalIndices[i] = originalIndices[rnd];
             originalIndices[rnd] = tempIndex;
@@ -90,7 +89,6 @@ public class CardManager : MonoBehaviour
                 card.transform.localPosition = new Vector3(i * spacing - (spacing / 2), 0, 0);
                 card.name = "Card_" + i;
 
-                // 保存原始索引
                 cardIndexMap[card] = originalIndices[i];
 
                 AddClickComponent(card);
@@ -99,6 +97,23 @@ public class CardManager : MonoBehaviour
         }
 
         Time.timeScale = 0;
+    }
+
+
+    void ClearAllCardUI()
+    {
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if (canvas != null)
+        {
+            // 查找所有标记为卡牌UI的对象并销毁
+            foreach (Transform child in canvas.transform)
+            {
+                if (child != this.transform && child.name.Contains("(Clone)"))
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+        }
     }
 
     void AddClickComponent(GameObject card)
@@ -176,8 +191,6 @@ public class CardManager : MonoBehaviour
             CreateUI(uiPrefabByName);
             return;
         }
-
-        Debug.LogWarning("没有找到卡牌对应的UI预制体: " + card.name);
     }
 
     GameObject FindUIByCardPrefab(GameObject cardPrefab)

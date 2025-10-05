@@ -23,6 +23,7 @@ public class MechBody : MonoBehaviour
     private bool isOnCooldown = false;
     public ParticleSystem jetParticles;
     public Button mechBodyBotton;
+    private float jumpTimer;
 
     void Start()
     {
@@ -40,12 +41,14 @@ public class MechBody : MonoBehaviour
     void Update()
     {
         cooldownTimer += Time.deltaTime;
+        jumpTimer += Time.deltaTime;
         CheckGrounded();
 
         // 普通跳跃 
-        if (Input.GetKeyDown(KeyCode.Space)&&isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && jumpTimer >= 3)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpTimer = 0;
             
         }
 
