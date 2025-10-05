@@ -30,7 +30,10 @@ public class Manager : MonoBehaviour
 
     void Start()
     {
-        head.onClick.AddListener(HeadCard);
+        if (head != null)
+        {
+            head.onClick.AddListener(HeadCard);
+        }
     }
 
     void HeadCard()
@@ -58,6 +61,7 @@ public class Manager : MonoBehaviour
         if (timer > obstacleInterval && !hasObstacle)
         {
             MakeObstacle();
+            MakeAirShip();
             timer = 0;
         }
         
@@ -85,6 +89,10 @@ public class Manager : MonoBehaviour
             enemy = Instantiate(enemyPrefab, enemyPrefab.transform.position, Quaternion.identity);
             enemytimer = 0;
         }
+    }
+    void MakeAirShip()
+    {
+        
     }
 
     void MakeObstacle()

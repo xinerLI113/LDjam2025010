@@ -29,8 +29,12 @@ public class MechBody : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (jetParticles != null)
             jetParticles.Stop();
-            
-        mechBodyBotton.onClick.AddListener(ToggleJetSkill);
+
+        if (mechBodyBotton != null)
+
+        {
+            mechBodyBotton.onClick.AddListener(ToggleJetSkill);
+        }
     }
 
     void Update()

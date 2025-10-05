@@ -29,10 +29,13 @@ public class SkillsCardManager : MonoBehaviour
     void Start()
     {
         InitializeReferences();
-
+        if(lockHP!=null)
         lockHP.onClick.AddListener(LockCard);
+        if(spawn!=null)
         spawn.onClick.AddListener(SpawnCard);
+        if(renew!=null)
         renew.onClick.AddListener(AddHP);
+        if(platformCard!=null)
         platformCard.onClick.AddListener(PlatformCard);
         
     }
