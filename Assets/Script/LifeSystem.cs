@@ -4,40 +4,67 @@ using UnityEngine;
 
 public class LifeSystem : MonoBehaviour
 {
-    public double playerLifeLevel = 3;
-    public GameObject obstacle;
-    public int obstacleHurts = 1;//障碍物伤害
+    public float playerLifeLevel = 3;
+    public int obstacleHurts = 1;
+    public float playerWaterValue = 20;
+    public bool isInWater = false;
     
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("检测速度控制")]
+    public float waterCheckInterval = 0.5f; // 每0.5秒检测一次
+    private float waterTimer = 0f;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             playerLifeLevel -= obstacleHurts;
         }
+        
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            isInWater = true;
+        }
     }
+    
     void OnTriggerExit2D(Collider2D collision)
     {
-       
-       
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            isInWater = false;
+        }
     }
 
-
-    // Update is called once per frame
     void Update()
     {
-        
         if (playerLifeLevel <= 0)
         {
             Destroy(gameObject);
+        }
 
+        // 使用计时器控制检测频率
+        waterTimer += Time.deltaTime;
+        if (waterTimer >= waterCheckInterval)
+        {
+            UpdateWaterValue();
+            waterTimer = 0f;
+        }
+        if (playerWaterValue <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    void UpdateWaterValue()
+    {
+        if (isInWater)
+        {
+            playerWaterValue--; // 在水里减少
+        }
+        else
+        {
+            playerWaterValue++; // 不在水里恢复
         }
         
+        playerWaterValue = Mathf.Clamp(playerWaterValue, 0, 100);
     }
 }

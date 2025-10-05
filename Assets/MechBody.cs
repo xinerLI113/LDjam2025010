@@ -80,7 +80,7 @@ public class MechBody : MonoBehaviour
         
         foreach (Collider2D collider in colliders)
         {
-            if (collider.gameObject != gameObject && collider.CompareTag("Ground"))
+            if (collider.gameObject != gameObject && collider.CompareTag("Water"))
             {
                 isGrounded = true;
                 break;
@@ -91,7 +91,7 @@ public class MechBody : MonoBehaviour
         if (!isGrounded)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.6f);
-            if (hit.collider != null && hit.collider.CompareTag("Ground"))
+            if (hit.collider != null && hit.collider.CompareTag("Water"))
             {
                 isGrounded = true;
             }

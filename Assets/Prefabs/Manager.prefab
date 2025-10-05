@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5817143598765039551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6984773718462058280}
+  - component: {fileID: 2377669879439045551}
+  - component: {fileID: 8849718242478166183}
+  - component: {fileID: 6116839677961875775}
+  - component: {fileID: 2800719636067658367}
+  - component: {fileID: 4638861038549904883}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6984773718462058280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817143598765039551}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.2875686, y: -5.5231013, z: -0.13633445}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2377669879439045551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817143598765039551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add27abfb8cb24186940552445771e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 0}
+  weakPointPrefab: {fileID: 5182636437346541903, guid: a294cc12f84144dc88f81d553f6acdee, type: 3}
+  enemyPrefab: {fileID: 4733470379837490560, guid: 502e62b65dc4e40e880802b7999125d4, type: 3}
+  obstaclePrefabs: {fileID: 743192264724033283, guid: efad06a96548341b0a140bc6f3f0557e, type: 3}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  obstacleSpeed: 5
+  enemytimer: 0
+  yOffsetRange: 2
+  obstacleInterval: 5
+--- !u!114 &8849718242478166183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817143598765039551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07156551c9c844a5886267ad870e6aac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCenter: {fileID: 0}
+  spawnSize: {x: 61.9, y: 14.2, z: 10}
+  collectiblePrefab: {fileID: 9210544215719941143, guid: 9cd724bc690f44b76ba1a96ee1331717, type: 3}
+  maxMaterials: 10
+  spawnInterval: 5
+--- !u!114 &6116839677961875775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817143598765039551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab320ce4913a143b4816b76cd54b8395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockHP: {fileID: 0}
+  spawn: {fileID: 0}
+  farAttack: {fileID: 0}
+  playerPrefab: {fileID: 2463913970923568271, guid: dff6cdbe707c84733ba1a8f27194d6b6, type: 3}
+  spawnPoint: {fileID: 0}
+  renew: {fileID: 0}
+  platformCard: {fileID: 0}
+  lifeSystem: {fileID: 0}
+  platform: {fileID: 0}
+  randomNumber: 0
+--- !u!114 &2800719636067658367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817143598765039551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb0887bf93524d129074c411b1a25bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpSolider: {fileID: 0}
+  waterSolider: {fileID: 0}
+  lifeSystem: {fileID: 0}
+--- !u!114 &4638861038549904883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5817143598765039551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a12ab643fe254cf99a9cf9b0c9b1347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterBossRoom: {fileID: 0}
+  bossRoomSceneName: BossRoom

@@ -88,7 +88,7 @@ public class SkillsCardManager : MonoBehaviour
         if (isRenew == true && timer >= 20)
         {
 
-            lifeSystem.playerLifeLevel *= 1.1;
+            lifeSystem.playerLifeLevel *= 1.1f;
             timer = 0;//每二十秒恢复生命值,药神
         }
         if (platformCardEnable)
@@ -145,7 +145,7 @@ public class SkillsCardManager : MonoBehaviour
                 
                 if (lifeSystem != null)
                 {
-                    lifeSystem.playerLifeLevel *= 0.7;
+                    lifeSystem.playerLifeLevel *= 0.7f;
                     isInitialized = true;
                    
                 }

@@ -16,7 +16,7 @@ public class Manager : MonoBehaviour
     private GameObject obstacle;
     public GameObject startPoint;
     public GameObject endPoint;
-    public float obstacleSpeed = 3;
+    public float obstacleSpeed = 7;
     private float timer;
     public float enemytimer;
 
