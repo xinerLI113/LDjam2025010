@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7173625372940855427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3598481803827769356}
+  - component: {fileID: 211291249396568811}
+  m_Layer: 0
+  m_Name: TopdownMissileAttackPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3598481803827769356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173625372940855427}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.541, y: 2.513, z: -0.0077351583}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &211291249396568811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7173625372940855427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1238768a814b45f7925681ab1905f2f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimDuration: 1.5
+  missileHeight: 10
+  missileSpeed: 15
+  useGravity: 1
+  gravityScale: 3
+  markerPrefab: {fileID: 724802319049023862, guid: 56c98d0f8d884cf4a81c6330443d9362, type: 3}
+  missilePrefab: {fileID: 3128190540675138022, guid: 1afc6c0d95d31124990b1202e6affafc, type: 3}
+  explosionPrefab: {fileID: 3377256471732378819, guid: 93c4e2648a8362244824465895dfa614, type: 3}
+  explosionDuration: 2
+  explosionRadius: 2
+  explosionDamage: 2

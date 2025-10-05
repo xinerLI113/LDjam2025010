@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Material
   - Water
+  - Platform
   layers:
   - Default
   - TransparentFX
