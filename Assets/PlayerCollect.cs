@@ -9,6 +9,7 @@ public class PlayerCollect : MonoBehaviour
     public int materialCount;
     private Rigidbody2D rb;
     public string sceneToLoad = "BossRoom";
+    public bool platFormEnable = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +31,10 @@ public class PlayerCollect : MonoBehaviour
         if (collision.gameObject.CompareTag("Enter"))
         {
             SceneManager.LoadScene("BossRoom");
+        }
+        if (materialCount >= 7)
+        {
+            platFormEnable = true;
         }
 
     }

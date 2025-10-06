@@ -13,7 +13,7 @@ public class PlatformManager : MonoBehaviour
     public GameObject enterPre;
     private GameObject enter;
     public GameObject player;
-    public bool platFormEnable;
+    public bool enterEnable;
     
     // Start is called before the first frame update
     void Start()
@@ -26,13 +26,13 @@ public class PlatformManager : MonoBehaviour
     {
         if (playerCollect.materialCount == 7)
         {
-            platFormEnable = true;
+            enterEnable = true;
         }
         platformCollect.value = playerCollect.materialCount;
-        if (platFormEnable==true)
+        if (enterEnable==true)
         {
             enter = Instantiate(enterPre, player.transform.position, quaternion.identity);
-            platFormEnable = false;
+            
             //生成入口
         }
 
