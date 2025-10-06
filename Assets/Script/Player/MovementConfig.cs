@@ -28,5 +28,9 @@ namespace Script.Player
         public LayerMask groundLayer;
         public float groundCheckDistance = 0.1f;
         public float groundCheckWidth = 0.9f;
+        
+        [Header("Water Physics")]
+        [Tooltip("How quickly the player's vertical speed slows to zero in water. Higher is faster.")]
+        public float waterVerticalDrag = 15f;
     }
 }

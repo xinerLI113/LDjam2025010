@@ -10,6 +10,10 @@ namespace Script.Player
         [Header("References")]
         public MovementConfig config;
         
+        [Header("Layer Masks")]
+        [Tooltip("Set this to the layer your water objects are on.")]
+        public LayerMask waterLayer;
+        
         // Components
         private Rigidbody2D rb;
         private Collider2D col;
@@ -17,6 +21,7 @@ namespace Script.Player
         // States
         public Vector2 Velocity { get; private set; }
         public bool IsGrounded { get; private set; }
+        public bool IsInWater { get; private set; }
         public bool WasGroundedLastFrame { get; private set; }
         public float TimeSinceGrounded { get; private set; }
         public float TimeSinceJumpPressed { get; private set; }
@@ -74,30 +79,31 @@ namespace Script.Player
             // Sync from Rigidbody
             Velocity = rb.velocity;
 
-            // --- NEW: UPDATE TIMERS HERE ---
-            // Update all timers in FixedUpdate to be in sync with physics
+            // Update timers
             TimeSinceJumpPressed += Time.fixedDeltaTime;
             TimeSinceGrounded += Time.fixedDeltaTime;
-            // --- END NEW SECTION ---
 
             // Check ground state
             WasGroundedLastFrame = IsGrounded;
-            CheckGrounded(); // This will reset TimeSinceGrounded if we're on the ground
+            CheckGrounded(); 
 
             // Calculate new velocities
             Vector2 newVelocity = CalculateMovement();
 
-            // Features modify velocity
-            foreach (var feature in features)
+            // Only allow features to modify velocity if we are NOT in water
+            if (!IsInWater) 
             {
-                if (feature.IsEnabled)
-                    newVelocity = feature.ModifyVelocity(newVelocity);
+                foreach (var feature in features)
+                {
+                    if (feature.IsEnabled)
+                        newVelocity = feature.ModifyVelocity(newVelocity);
+                }
             }
     
             Velocity = newVelocity;
             VerticalVelocity = newVelocity.y;
 
-            // Apply velocity ONCE at the very end
+            // Apply final velocity. This now works for all states.
             rb.velocity = newVelocity;
 
             // Features process post-update
@@ -107,53 +113,52 @@ namespace Script.Player
                     feature.OnPostUpdate();
             }
         }
-        
+
         private Vector2 CalculateMovement()
         {
             Vector2 velocity = Velocity;
-    
-            // Horizontal movement
+
             float targetSpeed = InputDirection.x * config.moveSpeed;
             float acceleration = IsGrounded ? config.groundAcceleration : config.airAcceleration;
-    
+
             velocity.x = Mathf.MoveTowards(
                 velocity.x,
                 targetSpeed,
                 acceleration * Time.fixedDeltaTime
             );
-    
-            // Vertical movement
-            float verticalVelocity = velocity.y;
-    
-            // Handle jumping
-            if (CanJump())
+
+            if (IsInWater)
             {
-                StartJump();
+                velocity.y = rb.velocity.y;
             }
-    
-            if (IsJumping)
+            else // Not in water, so use our custom jump and gravity logic
             {
-                if (jumpHeld && JumpTimeCounter < config.jumpTime)
+                if (CanJump())
                 {
-                    verticalVelocity = config.jumpForce;
-                    JumpTimeCounter += Time.fixedDeltaTime;
+                    StartJump();
                 }
-                else
+
+                if (IsJumping)
                 {
-                    IsJumping = false;
+                    if (jumpHeld && JumpTimeCounter < config.jumpTime)
+                    {
+                        velocity.y = config.jumpForce;
+                        JumpTimeCounter += Time.fixedDeltaTime;
+                    }
+                    else
+                    {
+                        IsJumping = false;
+                    }
+                }
+
+                if (!IsJumping)
+                {
+                    float gravity = velocity.y > 0 ? config.jumpGravity : config.fallGravity;
+                    velocity.y += gravity * Time.fixedDeltaTime;
+                    velocity.y = Mathf.Max(velocity.y, -config.maxFallSpeed);
                 }
             }
-    
-            // Apply gravity
-            if (!IsJumping || !jumpHeld)
-            {
-                float gravity = verticalVelocity > 0 ? config.jumpGravity : config.fallGravity;
-                verticalVelocity += gravity * Time.fixedDeltaTime;
-                verticalVelocity = Mathf.Max(verticalVelocity, -config.maxFallSpeed);
-            }
-    
-            velocity.y = verticalVelocity;
-    
+
             return velocity;
         }
         
@@ -191,7 +196,6 @@ namespace Script.Player
     
             if (IsGrounded)
             {
-                // Reset timer on the frame we are grounded
                 TimeSinceGrounded = 0f;
             }
 
@@ -208,21 +212,21 @@ namespace Script.Player
             }
         }
         
+        // In PlayerController.cs, replace the existing CanJump method
+
         private bool CanJump()
         {
-            // Standard jump check (immediate ground jump)
+            // If in water, we can never jump.
+            if (IsInWater) return false;
+
+            // Standard jump check
             bool groundJump = IsGrounded && jumpPressed;
 
-            // Jump buffering - allow jump if pressed recently while grounded
+            // Jump buffering
             bool bufferedJump = IsGrounded && TimeSinceJumpPressed < config.jumpBufferTime;
 
-            // Coyote time - allow jump if:
-            // - Not currently grounded
-            // - Recently left ground (within coyote time)
-            // - Jump was pressed recently (within buffer time)
-            bool coyoteJump = !IsGrounded 
-                              && TimeSinceGrounded < config.coyoteTime 
-                              && TimeSinceJumpPressed < config.jumpBufferTime;
+            // Coyote time
+            bool coyoteJump = !IsGrounded && TimeSinceGrounded < config.coyoteTime && jumpPressed;
 
             return (groundJump || bufferedJump || coyoteJump) && !IsJumping;
         }
@@ -262,6 +266,41 @@ namespace Script.Player
         public bool IsJumpHeld() => jumpHeld;
         public bool IsJumpReleased() => jumpReleased;
         public float GetApexPoint() => apexPoint;
+        
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            // Check if the layer of the object we entered is in our waterLayer mask
+            if ((waterLayer.value & (1 << other.gameObject.layer)) > 0)
+            {
+                EnterWater();
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D other)
+        {
+            // Check if the layer of the object we exited is in our waterLayer mask
+            if ((waterLayer.value & (1 << other.gameObject.layer)) > 0)
+            {
+                ExitWater();
+            }
+        }
+
+        private void EnterWater()
+        {
+            if (IsInWater) return;
+
+            IsInWater = true;
+            IsJumping = false;
+            rb.gravityScale = 1;
+        }
+
+        private void ExitWater()
+        {
+            if (!IsInWater) return;
+
+            IsInWater = false;
+            rb.gravityScale = 0;
+        }
         
         void OnDrawGizmos()
         {
