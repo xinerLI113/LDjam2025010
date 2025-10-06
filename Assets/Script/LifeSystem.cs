@@ -12,6 +12,7 @@ namespace Script
     public class LifeSystem : MonoBehaviour
     {
         [SerializeField] private float playerLifeLevel = 3;
+        [SerializeField] private FinalCardManager finalCardManager;
         public int obstacleHurts = 1;
         public float playerWaterValue = 20;
         public bool isInWater = false;
@@ -68,6 +69,10 @@ namespace Script
             if (playerWaterValue <= 0)
             {
                 Destroy(gameObject);
+            }
+            if (finalCardManager.isSpawn == true)
+            {
+                playerLifeLevel = 6;
             }
         }
     
