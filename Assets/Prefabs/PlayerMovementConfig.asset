@@ -27,3 +27,4 @@ MonoBehaviour:
     m_Bits: 8
   groundCheckDistance: 0.61
   groundCheckWidth: 1
+  waterGravityScale: 0.5
