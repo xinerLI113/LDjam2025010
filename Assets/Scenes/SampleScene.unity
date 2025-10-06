@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: 209.45}
+  m_AnchoredPosition: {x: 0, y: 229.45}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &48487652
@@ -585,8 +585,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 237, y: 209.45}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 241.71753, y: 229.45}
+  m_SizeDelta: {x: 185.4351, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &442137171
 MonoBehaviour:
@@ -704,8 +704,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -23.288696, y: 2.5}
-  m_SizeDelta: {x: -46.5774, y: 5}
+  m_AnchoredPosition: {x: 204.08044, y: 68}
+  m_SizeDelta: {x: 450.8426, y: 228.6383}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494030524
 MonoBehaviour:
@@ -727,8 +727,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c8ff8fb51e3604b8d86d9673172637d3, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -20036,7 +20036,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1518771197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcc2d8a30ebba460da6c1ddbbb912010, type: 3}
   m_Name: 
@@ -21127,6 +21127,10 @@ PrefabInstance:
       propertyPath: enterPrefab
       value: 
       objectReference: {fileID: 3761298485459381578, guid: e0e8fa17a41884673b1adceef55946b1, type: 3}
+    - target: {fileID: 2037597916879412793, guid: dff6cdbe707c84733ba1a8f27194d6b6, type: 3}
+      propertyPath: spawnDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2463913970923568271, guid: dff6cdbe707c84733ba1a8f27194d6b6, type: 3}
       propertyPath: m_Name
       value: Player

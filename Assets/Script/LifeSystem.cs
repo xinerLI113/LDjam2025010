@@ -70,7 +70,7 @@ namespace Script
             {
                 Destroy(gameObject);
             }
-            if (finalCardManager.isSpawn == true)
+            if (finalCardManager != null && finalCardManager.respawnReady == false)
             {
                 playerLifeLevel = 6;
             }

@@ -18,7 +18,7 @@ public class FinalCardManager : MonoBehaviour
     public Transform spawnPoint;
     
     private float respawnTimer = 0f;
-    private bool respawnReady = true;
+    public bool respawnReady = true;
     public bool isSpawn;
     [SerializeField] private LifeSystem lifeSystem;
     public Button renew;
