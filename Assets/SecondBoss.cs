@@ -25,6 +25,10 @@ public class ChangeSprite : MonoBehaviour
         {
             ChangeToNewSprite();
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            ChangeToNewSprite();
+        }
     }
 
     void ChangeToNewSprite()

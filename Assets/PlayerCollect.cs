@@ -23,9 +23,13 @@ public class PlayerCollect : MonoBehaviour
     void Update()
     {
         // 当收集够材料时生成入口
-        if (materialCount >= 7 && currentEnter == null)
+        if (materialCount >= 5 && currentEnter == null)
         {
             SpawnEnterInFront();
+        }
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            materialCount = 5;
         }
     }
 
@@ -53,7 +57,7 @@ public class PlayerCollect : MonoBehaviour
         {
             SceneManager.LoadScene("BossRoom");
         }
-        if (materialCount >= 7)
+        if (materialCount >= 5)
         {
             platFormEnable = true;
         }
