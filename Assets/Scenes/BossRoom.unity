@@ -205,6 +205,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 250289995742673274, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5ddc6ffc7ebd94f0ba5c2b886c10a335, type: 3}
+    - target: {fileID: 1895890459509898563, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1895890459509898563, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1895890459509898563, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 1895890459509898563, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 1895890459509898563, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2286011788900281319, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.8789997
@@ -245,6 +269,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2419686019515171517, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c4a38d4d237a7419b95ee35326b1bd52, type: 3}
     - target: {fileID: 3586745381764290610, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
       propertyPath: m_Name
       value: BossEnemy
@@ -256,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 5512183872938175345, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143716440504079758, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9018942833300957456, guid: 9446f29b7bf6337479e00b8da3e34c49, type: 3}
       propertyPath: m_IsActive
@@ -17363,6 +17395,7 @@ MonoBehaviour:
   respawnParticle: {fileID: 1630123592}
   playerPrefab: {fileID: 2463913970923568271, guid: dff6cdbe707c84733ba1a8f27194d6b6, type: 3}
   spawnPoint: {fileID: 6890640208289841455, guid: dff6cdbe707c84733ba1a8f27194d6b6, type: 3}
+  respawnReady: 1
   isSpawn: 0
   lifeSystem: {fileID: 1630123573}
   renew: {fileID: 1522634497}
