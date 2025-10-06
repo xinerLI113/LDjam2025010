@@ -76,21 +76,22 @@ namespace Script.Player
         
         void FixedUpdate()
         {
-            // Sync from Rigidbody
             Velocity = rb.velocity;
 
-            // Update timers
             TimeSinceJumpPressed += Time.fixedDeltaTime;
             TimeSinceGrounded += Time.fixedDeltaTime;
 
-            // Check ground state
+            if (IsInWater && jumpPressed && config.waterJumpImpulse > 0)
+            {
+                rb.AddForce(Vector2.up * config.waterJumpImpulse, ForceMode2D.Impulse);
+                TimeSinceJumpPressed = config.jumpBufferTime + 0.1f;
+            }
+            
             WasGroundedLastFrame = IsGrounded;
             CheckGrounded(); 
 
-            // Calculate new velocities
             Vector2 newVelocity = CalculateMovement();
 
-            // Only allow features to modify velocity if we are NOT in water
             if (!IsInWater) 
             {
                 foreach (var feature in features)
@@ -102,11 +103,8 @@ namespace Script.Player
     
             Velocity = newVelocity;
             VerticalVelocity = newVelocity.y;
-
-            // Apply final velocity. This now works for all states.
             rb.velocity = newVelocity;
 
-            // Features process post-update
             foreach (var feature in features)
             {
                 if (feature.IsEnabled)
@@ -126,12 +124,15 @@ namespace Script.Player
                 targetSpeed,
                 acceleration * Time.fixedDeltaTime
             );
+            
+            if (InputDirection.x != 0f) scriptAnimator.SetIsMoving(true);
+            else scriptAnimator.SetIsMoving(false);
 
             if (IsInWater)
             {
                 velocity.y = rb.velocity.y;
             }
-            else // Not in water, so use our custom jump and gravity logic
+            else
             {
                 if (CanJump())
                 {
@@ -211,15 +212,23 @@ namespace Script.Player
                 OnLeftGround();
             }
         }
-        
-        // In PlayerController.cs, replace the existing CanJump method
 
         private bool CanJump()
         {
-            // If in water, we can never jump.
-            if (IsInWater) return false;
+            // Water Jump Logic
+            if (IsInWater)
+            {
+                if (config.canJumpInWater)
+                {
+                    return jumpPressed && !IsJumping;
+                }
+                else
+                {
+                    return false;
+                }
+            }
 
-            // Standard jump check
+            // Ground/Air Jump Logic (if not in water)
             bool groundJump = IsGrounded && jumpPressed;
 
             // Jump buffering
@@ -293,6 +302,8 @@ namespace Script.Player
             IsInWater = true;
             IsJumping = false;
             rb.gravityScale = 1;
+            
+            scriptAnimator.SetIsInWater(true);
         }
 
         private void ExitWater()
@@ -301,6 +312,8 @@ namespace Script.Player
 
             IsInWater = false;
             rb.gravityScale = 0;
+            
+            scriptAnimator.SetIsInWater(false);
         }
         
         void OnDrawGizmos()

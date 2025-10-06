@@ -27,7 +27,6 @@ namespace Script
         
         void Update()
         {
-            // Handle lifetime destruction
             if (lifetime > 0 && Time.time - spawnTime >= lifetime)
             {
                 Destroy(gameObject);

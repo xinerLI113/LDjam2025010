@@ -32,5 +32,7 @@ namespace Script.Player
         [Header("Water Physics")]
         [Tooltip("How quickly the player's vertical speed slows to zero in water. Higher is faster.")]
         public float waterVerticalDrag = 15f;
+        public float waterJumpImpulse = 10f;
+        public bool canJumpInWater = true;
     }
 }

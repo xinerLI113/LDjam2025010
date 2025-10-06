@@ -31,5 +31,15 @@ namespace Script
         {
             jetpackAnimator.SetBool("JetActive", jetActive);
         }
+
+        public void SetIsMoving(bool moving)
+        {
+            spriteAnimator.SetBool("IsMoving", moving);
+        }
+
+        public void SetIsInWater(bool isInWater)
+        {
+            spriteAnimator.SetBool("IsInWater", isInWater);
+        }
     }
 }

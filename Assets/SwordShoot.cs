@@ -10,10 +10,8 @@ public class SwordShoot : MonoBehaviour
     private float swordTimer;
     void Start()
     {
-       
-        
+        if(swordPre != null)
             swordFar.onClick.AddListener(SwordEnable);
-        
     }
     void Update()
     {
