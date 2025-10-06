@@ -145,7 +145,7 @@ namespace Script
             {
                 if (hitCollider.TryGetComponent(out LifeSystem lifeSystem))
                 {
-                    lifeSystem.playerLifeLevel -= explosionDamage;
+                    lifeSystem.TakeDamage(explosionDamage);
                     Debug.Log("Player hit by explosion!");
                 }
             }

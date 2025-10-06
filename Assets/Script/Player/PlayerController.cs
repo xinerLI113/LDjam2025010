@@ -38,6 +38,7 @@ namespace Script.Player
         private bool jumpHeld;
         private bool jumpReleased;
         private float apexPoint;
+        private PlayerAnimatorController scriptAnimator;
         
         void Awake()
         {
@@ -46,6 +47,7 @@ namespace Script.Player
             rb.freezeRotation = true;
             rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
             rb.gravityScale = 0; // We handle gravity manually
+            scriptAnimator = FindObjectOfType<PlayerAnimatorController>();
             
             // Gather all movement features
             features.AddRange(GetComponents<IMovementFeature>());
@@ -63,8 +65,6 @@ namespace Script.Player
         {
             // Gather input
             GatherInput();
-    
-            // UpdateTimers(); // << REMOVE THIS LINE
 
             // Let features process pre-update
             foreach (var feature in features)
@@ -237,6 +237,7 @@ namespace Script.Player
             JumpTimeCounter = 0f;
             TimeSinceGrounded = config.coyoteTime + 0.01f; // Prevent double coyote jump
             TimeSinceJumpPressed = config.jumpBufferTime + 0.01f; // Prevent double buffered jump
+            scriptAnimator.TriggerJumpAnimation();
         }
         
         public void OnLanded()

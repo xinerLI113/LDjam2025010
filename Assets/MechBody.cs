@@ -25,6 +25,13 @@ public class MechBody : MovementFeature
     private bool isOnCooldown = false;
     private float currentFlyTime = 0f;
     private float cooldownTimer = 0f;
+    private PlayerAnimatorController scriptAnimator;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        scriptAnimator = FindObjectOfType<PlayerAnimatorController>();
+    }
 
     public override void Initialize(PlayerController controller)
     {
@@ -78,9 +85,7 @@ public class MechBody : MovementFeature
     public override Vector2 ModifyVelocity(Vector2 velocity)
     {
         if (isFlying)
-        {
             velocity.y = flyForce; 
-        }
             
         return velocity;
     }
@@ -92,9 +97,8 @@ public class MechBody : MovementFeature
         IsEnabled = !IsEnabled;
 
         if (!IsEnabled && isFlying)
-        {
             StopJetFlight();
-        }
+        
         // Optional: Update UI to show skill is on/off
     }
 
@@ -102,9 +106,11 @@ public class MechBody : MovementFeature
     {
         isFlying = true;
         currentFlyTime = 0f;
+        scriptAnimator.SetJetActive(true);
         
         // Give an initial upward kick
-        Rigidbody2D rb = controller.GetComponent<Rigidbody2D>();
+        if (rb == null)
+            rb = controller.GetComponent<Rigidbody2D>();
         rb.velocity = new Vector2(rb.velocity.x, jetInitialBoost);
 
         if (jetParticles != null)
@@ -113,6 +119,7 @@ public class MechBody : MovementFeature
 
     private void StopJetFlight()
     {
+        scriptAnimator.SetJetActive(false);
         if (!isFlying) return;
 
         isFlying = false;
@@ -130,9 +137,7 @@ public class MechBody : MovementFeature
         foreach (Collider2D enemy in enemies)
         {
             if (enemy.TryGetComponent<LifeSystem>(out var enemyHealth))
-            {
-                enemyHealth.playerLifeLevel -= (jetDamage * Time.deltaTime);
-            }
+                enemyHealth.TakeDamage(jetDamage * Time.deltaTime);
         }
     }
 

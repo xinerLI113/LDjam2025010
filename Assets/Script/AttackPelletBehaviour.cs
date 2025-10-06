@@ -67,7 +67,7 @@ namespace Script
             {
                 if (collision.CompareTag("Player"))
                 {
-                    collision.gameObject.GetComponent<LifeSystem>().playerLifeLevel -= damage;
+                    collision.gameObject.GetComponent<LifeSystem>().TakeDamage(damage);
                     Destroy(gameObject);
                 }
             }

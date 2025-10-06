@@ -13,13 +13,13 @@ public class SliderController : MonoBehaviour
     void Start()
     {
         waterSolider.maxValue = lifeSystem.playerWaterValue;
-        hpSolider.maxValue = lifeSystem.playerLifeLevel;
+        hpSolider.maxValue = lifeSystem.HealthLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hpSolider.value = lifeSystem.playerLifeLevel;
+        hpSolider.value = lifeSystem.HealthLevel;
         waterSolider.value = lifeSystem.playerWaterValue;
     }
 }
