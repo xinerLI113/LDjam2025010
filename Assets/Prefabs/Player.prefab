@@ -137,17 +137,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1eaafc006f68f4e71a82a2711b092cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 18
+  isEnabled: 1
+  jetInitialBoost: 15
   flyForce: 2
   maxFlyTime: 2
+  cooldownDuration: 10
+  jetParticles: {fileID: 5854260572043349678}
   jetDamage: 20
   jetDamageRadius: 2
-  checkRadius: 0.2
-  groundLayer:
+  enemyLayer:
     serializedVersion: 2
-    m_Bits: 16
-  jetParticles: {fileID: 5854260572043349678}
-  mechBodyBotton: {fileID: 0}
+    m_Bits: 0
+  mechBodyButton: {fileID: 0}
 --- !u!198 &5854260572043349678
 ParticleSystem:
   m_ObjectHideFlags: 0
