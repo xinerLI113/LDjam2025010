@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollect : MonoBehaviour
 {
-    
+
     public int materialCount;
     private Rigidbody2D rb;
+    public string sceneToLoad = "BossRoom";
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,12 @@ public class PlayerCollect : MonoBehaviour
             Destroy(collision.gameObject);
             materialCount++;
         }
-        
+        if (collision.gameObject.CompareTag("Enter"))
+        {
+            SceneManager.LoadScene("BossRoom");
+        }
+
     }
+    
+    
 }

@@ -8,31 +8,58 @@ public class Platform : MonoBehaviour
     public GameObject platFormPrefab;
     GameObject platForm;
     public Vector2 gap = new Vector2(2, 2);
-
     public float gapTime = 10;
     [SerializeField] private PlayerCollect playerCollect;
-    // Start is called before the first frame update
+    [SerializeField] private PlatformManager platformManager;
+    [SerializeField] private AttackEnemy attackEnemy;
+
     void Start()
     {
-       playerCollect = FindFirstObjectByType<PlayerCollect>();
+        playerCollect = FindFirstObjectByType<PlayerCollect>();
+        attackEnemy = FindFirstObjectByType<AttackEnemy>();
         
+        // 确保一开始伤害为0
+        if (attackEnemy != null)
+        {
+            attackEnemy.SetDamageEnabled(false);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.P))//收集十个材料才能生成平台
+        if (Input.GetKeyDown(KeyCode.P) && platformManager.platFormEnable == true)
         {
-            platForm = Instantiate(platFormPrefab, gap, quaternion.identity);//生成平台在上面攻击敌人
-            
+            platForm = Instantiate(platFormPrefab, gap, quaternion.identity);
+            playerCollect.materialCount = 0;
         }
-        if (Time.time > gapTime)
+        
+        if (Time.time > gapTime && platForm != null)
         {
             Destroy(platForm);
-
         }
-        
-        
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            // 站在平台上时启用伤害
+            if (attackEnemy != null)
+            {
+                attackEnemy.SetDamageEnabled(true);
+            }
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            // 离开平台时禁用伤害
+            if (attackEnemy != null)
+            {
+                attackEnemy.SetDamageEnabled(false);
+            }
+        }
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - Material
   - Water
   - Platform
+  - Enter
   layers:
   - Default
   - TransparentFX
