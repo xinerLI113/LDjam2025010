@@ -12,6 +12,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private PlayerCollect playerCollect;
     [SerializeField] private PlatformManager platformManager;
     [SerializeField] private AttackEnemy attackEnemy;
+    
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class Platform : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P) && platformManager.platFormEnable == true)
+        if (Input.GetKeyDown(KeyCode.P)&&playerCollect.platFormEnable==true)
         {
             platForm = Instantiate(platFormPrefab, gap, quaternion.identity);
             playerCollect.materialCount = 0;

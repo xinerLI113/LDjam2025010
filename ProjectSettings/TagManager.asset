@@ -12,6 +12,7 @@ TagManager:
   - Water
   - Platform
   - Enter
+  - Boundary
   layers:
   - Default
   - TransparentFX
