@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Script;
+using Script.Player;
 using UnityEngine;
 
 public class BossBehaviour : MonoBehaviour
@@ -29,12 +30,12 @@ public class BossBehaviour : MonoBehaviour
     
     private BossState _state = BossState.Idle;
     private float _currentStateDuration;
-    private PlayerMovement _player;
+    private PlayerController _player;
     private bool _isAttacking = false; // Flag to prevent multiple simultaneous attacks
 
     void Start()
     {
-        _player = FindObjectOfType<PlayerMovement>();
+        _player = FindObjectOfType<PlayerController>();
         _currentStateDuration = idleStateDuration; // Initialize properly
     }
 
@@ -68,7 +69,7 @@ public class BossBehaviour : MonoBehaviour
         _state = BossState.Attacking;
         
         if (_player == null)
-            _player = FindObjectOfType<PlayerMovement>();
+            _player = FindObjectOfType<PlayerController>();
 
         int selectedAttack = Random.Range(0, 2); // Returns 0 or 1
 

@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerAnimatorController : MonoBehaviour
+namespace Script
 {
-    [SerializeField] private Animator spriteAnimator;
-
-    public void PlayUseAbilityAnimation()
+    public class PlayerAnimatorController : MonoBehaviour
     {
-        spriteAnimator.SetTrigger("UseAbility1");
+        [SerializeField] private Animator spriteAnimator;
+
+        public void PlayUseAbilityAnimation()
+        {
+            spriteAnimator.SetTrigger("UseAbility1");
+        }
     }
 }

@@ -1,70 +1,71 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeSystem : MonoBehaviour
+namespace Script
 {
-    public float playerLifeLevel = 3;
-    public int obstacleHurts = 1;
-    public float playerWaterValue = 20;
-    public bool isInWater = false;
-    
-    [Header("检测速度控制")]
-    public float waterCheckInterval = 0.5f; // 每0.5秒检测一次
-    private float waterTimer = 0f;
-
-    void OnTriggerEnter2D(Collider2D collision)
+    public class LifeSystem : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        public float playerLifeLevel = 3;
+        public int obstacleHurts = 1;
+        public float playerWaterValue = 20;
+        public bool isInWater = false;
+    
+        [Header("检测速度控制")]
+        public float waterCheckInterval = 0.5f; // 每0.5秒检测一次
+        private float waterTimer = 0f;
+
+        void OnTriggerEnter2D(Collider2D collision)
         {
-            playerLifeLevel -= obstacleHurts;
-        }
+            if (collision.gameObject.CompareTag("Obstacle"))
+            {
+                playerLifeLevel -= obstacleHurts;
+            }
         
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            isInWater = true;
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                isInWater = true;
+            }
         }
-    }
     
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Water"))
+        void OnTriggerExit2D(Collider2D collision)
         {
-            isInWater = false;
-        }
-    }
-
-    void Update()
-    {
-        if (playerLifeLevel <= 0)
-        {
-            Destroy(gameObject);
+            if (collision.gameObject.CompareTag("Water"))
+            {
+                isInWater = false;
+            }
         }
 
-        // 使用计时器控制检测频率
-        waterTimer += Time.deltaTime;
-        if (waterTimer >= waterCheckInterval)
+        void Update()
         {
-            UpdateWaterValue();
-            waterTimer = 0f;
+            if (playerLifeLevel <= 0)
+            {
+                Destroy(gameObject);
+            }
+
+            // 使用计时器控制检测频率
+            waterTimer += Time.deltaTime;
+            if (waterTimer >= waterCheckInterval)
+            {
+                UpdateWaterValue();
+                waterTimer = 0f;
+            }
+            if (playerWaterValue <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-        if (playerWaterValue <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
     
-    void UpdateWaterValue()
-    {
-        if (isInWater)
+        void UpdateWaterValue()
         {
-            playerWaterValue--; // 在水里减少
-        }
-        else
-        {
-            playerWaterValue++; // 不在水里恢复
-        }
+            if (isInWater)
+            {
+                playerWaterValue--; // 在水里减少
+            }
+            else
+            {
+                playerWaterValue++; // 不在水里恢复
+            }
         
-        playerWaterValue = Mathf.Clamp(playerWaterValue, 0, 100);
+            playerWaterValue = Mathf.Clamp(playerWaterValue, 0, 100);
+        }
     }
 }

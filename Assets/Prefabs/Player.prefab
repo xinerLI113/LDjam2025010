@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6890640208289841455}
-  - component: {fileID: 8767298824960814967}
   - component: {fileID: 273714525582916485}
   - component: {fileID: 217231081232983730}
   - component: {fileID: 3360516025866174265}
@@ -23,6 +22,9 @@ GameObject:
   - component: {fileID: 7309413376096485792}
   - component: {fileID: 2872877271897583170}
   - component: {fileID: 2158543528216147296}
+  - component: {fileID: 5249646970652189416}
+  - component: {fileID: 3072338875404665780}
+  - component: {fileID: 541194946492052053}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -46,20 +48,6 @@ Transform:
   - {fileID: 4422031813576564607}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8767298824960814967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2463913970923568271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13ba4dd58e4f5458f960e7dbd1ed9cf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 4
-  isGrounded: 0
 --- !u!50 &273714525582916485
 Rigidbody2D:
   serializedVersion: 4
@@ -72,9 +60,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5.5
+  m_Mass: 3
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -118,6 +106,8 @@ MonoBehaviour:
   gap: {x: 2, y: 2}
   gapTime: 10
   playerCollect: {fileID: 2037597916879412793}
+  platformManager: {fileID: 0}
+  attackEnemy: {fileID: 0}
 --- !u!114 &5929063294552574506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4994,6 +4984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   materialCount: 0
+  sceneToLoad: BossRoom
 --- !u!114 &7309413376096485792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5008,7 +4999,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swordPre: {fileID: 5607071867049443378, guid: 46c19296d0ef54bf6a6c8cebfdbc46fb, type: 3}
   speed: 20
-  swordAnimator: {fileID: 0}
 --- !u!114 &2872877271897583170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5065,8 +5055,52 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.64, y: 1.64}
+  m_Size: {x: 0.64, y: 1.24}
   m_EdgeRadius: 0
+--- !u!114 &5249646970652189416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463913970923568271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a136f21829c40cebc26b5e3bd8f82ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: 5507d3ed9fa656a48921b42b0437d804, type: 2}
+--- !u!114 &3072338875404665780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463913970923568271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f7880bf90340a3a44e2d9aed33a58d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnabled: 1
+  apexThreshold: 2
+  apexGravityMultiplier: 0.5
+--- !u!114 &541194946492052053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463913970923568271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f593add73d4f739667a63837932dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnabled: 1
+  airControlMultiplier: 1.5
+  onlyAtApex: 1
+  apexThreshold: 3
 --- !u!1 &4949659287850457087
 GameObject:
   m_ObjectHideFlags: 0
@@ -5095,7 +5129,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6890640208289841455}

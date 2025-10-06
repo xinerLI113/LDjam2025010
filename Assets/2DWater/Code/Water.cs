@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Bundos.WaterSystem
+namespace _2DWater.Code
 {
     public class Spring
     {
